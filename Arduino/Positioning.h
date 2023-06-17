@@ -48,7 +48,7 @@ public:
      * @retval the the Heading Degrees of Potato relative to the North of the site in degrees
     */
     float getHeadingDegrees(void);
-}
+};
 
 Positioning::Positioning(const int UlsoNum, const int UlsoPin[], const int M, const int N)
 {

@@ -87,7 +87,6 @@ class Maze:
                     self.bk_array[i][j].backward = 'n'
                 else:
                     self.bk_array[i][j].backward = 's'
-                
                 break
             elif i == 0:
                 # if j%2==1:

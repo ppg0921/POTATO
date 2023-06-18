@@ -83,7 +83,7 @@ class Maze:
 
             if k == self.colNum*self.rowNum-1:
                 self.bk_array[i][j].forward = 'm'
-                if j%2==0:
+                if j % 2 == 0:
                     self.bk_array[i][j].backward = 'n'
                 else:
                     self.bk_array[i][j].backward = 's'
@@ -94,7 +94,7 @@ class Maze:
                     self.bk_array[0][0].forward = 's'
                     self.bk_array[0][0].backward = 'c'
                 else:
-                    if j%2==0:
+                    if j % 2 == 0:
                         self.bk_array[i][j].forward = 's'
                         self.bk_array[i][j].backward = 'w'
                     else:
@@ -105,19 +105,19 @@ class Maze:
                 else:
                     j += 1
             elif i == self.rowNum-1:
-                if j%2==0:
+                if j % 2 == 0:
                     self.bk_array[i][j].forward = 'e'
                     self.bk_array[i][j].backward = 'n'
                 else:
                     self.bk_array[i][j].forward = 'n'
                     self.bk_array[i][j].backward = 'w'
-                
+
                 if j % 2 == 0:
                     j += 1
                 else:
                     i -= 1
             else:
-                if j%2==0:
+                if j % 2 == 0:
                     self.bk_array[i][j].forward = 's'
                     self.bk_array[i][j].backward = 'n'
                 else:
@@ -133,7 +133,7 @@ class Maze:
                 self.cmd += str(self.bk_array[i][j].forward)
         for i in range(self.rowNum):
             for j in range(self.colNum):
-                self.cmd += str(self.bk_array[i][j].backward)      
+                self.cmd += str(self.bk_array[i][j].backward)
 
         self.cmd += "}"
         print("cmd: ", self.cmd)

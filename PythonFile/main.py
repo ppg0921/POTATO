@@ -38,43 +38,18 @@ def main():
         # send first action
         
         
-        interf.send_action(maze.getCmds())
-        
+        # interf.send_action(maze.getCmds())
         print("maze.getCmds(): ", maze.getCmds())
         # interf.send_action(maze.getCmds()[0])
         # print("maze.nowCmd: ", maze.nowCmd)
         # interf.send_action(maze.getCmds()[maze.nowCmd])
-        # maze.nowCmd+=1
+        # maze.nowCmd+=1            
         
-
-
-        # while(True):
-        #     state = interf.get_request()
-        #     if state == 2:
-        #         uidGet = False
-        #         while uidGet is False:
-        #             UIDstring = interf.get_UID()
-        #             if UIDstring!=0:
-        #                 uidGet = True
-        #                 UIDstring = UIDstring[2:]
-        #                 print("UIDstring.len:" , len(UIDstring))
-        #                 if len(UIDstring)==7:
-        #                     tmp = UIDstring
-        #                     UIDstring = "0"
-        #                     UIDstring += tmp
-        #                     print("UIDstring.len after processed:" , len(UIDstring))
-        #                 print("UIDstring:", UIDstring.upper())
-                        
-        #                 UIDstring = 0
-            
-        #     elif state == 1:
-        #         maze.nowCmd += 1
-        #         if(maze.nowCmd<maze.CmdLen):
-        #             print("maze.getCmds()[maze.nowCmd]: ", maze.getCmds()[maze.nowCmd])
-        #             interf.send_action(maze.getCmds()[maze.nowCmd])
-                
-                
-            
+        
+        while(True):
+            String_read = interf.get_string()
+            if String_read != "":
+                print("String_read = ", String_read);
             
         #     # if kb.is_pressed("w"):
         #     #     interf.send_action("f")

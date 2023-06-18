@@ -1,15 +1,17 @@
-#include <Ultrasonic.h>
-#include <QMC5883.h>
+#include "Ultrasonic.h"
+#include "QMC5883.h"
+#include <math.h>
 
 class Positioning
 {
 private:
-    double* OrthoDis;
+    double *OrthoDis;
     float nowAngle = 0;
     int _UlsoNum;
     Ultrasonic *Ulso;
     DFRobot_QMC5883 MagSensor;
     int _M, _N;
+
 public:
     Positioning(){};
 
@@ -20,7 +22,7 @@ public:
      * @param ultraNum Number of UltraSonic devices
      * @param Pin the TRIG and ECHO Pin for each UltraSonics
      * @param MN the length and width of the site
-    */
+     */
     Positioning(const int ultraNum, const int Pin[], const int M, const int N);
     ~Positioning(){};
 
@@ -29,25 +31,32 @@ public:
      * @brief set the orthogonal distance to the four wall in the order of [north, east, south, west]
      * @return void
      * @param nowFace the direction that Potato currently faces
-    */
+     */
     void setOrthoDis(int nowFace);
-
 
     /**
      * @fn getOrthoDis
      * @brief return the orthogonal distance to the four wall in the order of [north, east, south, west]
      * @return double*
      * @retval pointer to the distance array
-    */
-    double* getOrthoDis(void);
+     */
+    double *getOrthoDis(void);
 
     /**
      * @fn getHeadingDegrees
      * @brief get the Heading Degrees of Potato relative to the North of the site
      * @return float
      * @retval the the Heading Degrees of Potato relative to the North of the site in degrees
-    */
+     */
     float getHeadingDegrees(void);
+
+    /**
+     * @fn getHeadingBySonic
+     * @brief get the Heading Degrees of Potato by Sonic
+     * @return float
+     * @retval the the Heading Degrees of Potato
+     */
+    float getHeadingBySonic(void);
 };
 
 Positioning::Positioning(const int UlsoNum, const int UlsoPin[], const int M, const int N)
@@ -83,12 +92,20 @@ void Positioning::setOrthoDis(int nowFace)
     return;
 }
 
-double* Positioning::getOrthoDis(){return OrthoDis};
+double *Positioning::getOrthoDis(){return OrthoDis};
 
-float Positioning::getHeadingDegrees(void) {return MagSensor.getRelativeDegrees();}
+float Positioning::getHeadingDegrees(void) { return MagSensor.getRelativeDegrees(); }
 
-
-
-
-
-
+float Positioning::getHeadingBySonic(void)
+{
+    int i = 0;
+    float angle = 0;
+    double oldDis = {};
+    for (i = 0; i < _UlsoNum; i++)
+        oldDis[i] = OrthoDis[i];
+    setOrthoDis();
+    for (i = 0; i < _UlsoNum; i++)
+        oldDis[i] = OrthoDis[i] - oldDis[i];
+    angle = 180 * atan(oldDis[2], oldDis[1]) / PI;
+    return angle;
+}

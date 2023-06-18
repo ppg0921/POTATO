@@ -8,8 +8,8 @@ void setup()
 }
 void loop() 
 {
-	// int readData = DHT.read22(dataPin); // DHT22/AM2302
-	int readData = DHT.read11(dataPin); // DHT11
+	int readData = DHT.read22(dataPin); // DHT22/AM2302
+	// int readData = DHT.read11(dataPin); // DHT11
 
 	float t = DHT.temperature; // Gets the values of the temperature
 	float h = DHT.humidity; // Gets the values of the humidity

@@ -22,6 +22,9 @@ class BTinterface:
     def get_UID(self):
         return self.ser.SerialReadByte()
     
+    def get_string(self):
+        return str(self.ser.SerialReadString())
+    
     def get_request(self):
         request = str(self.ser.SerialReadOneByte())[:-1]
         # print("request: ", request)

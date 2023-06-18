@@ -66,9 +66,9 @@ class Maze:
                 new.append(Block(i, j))
             self.bk_array.append(new)
 
-        self.cmd += "{PiPiN:"
+        self.cmd += "{PiPiM:"
         self.cmd += str(self.colNum)
-        self.cmd += ",M:"
+        self.cmd += ",N:"
         self.cmd += str(self.rowNum)
         self.cmd += ",xlen:"
         self.cmd += str(self.blockLength)
@@ -82,7 +82,7 @@ class Maze:
             # print("i = ", i, "j = ", j)
 
             if k == self.colNum*self.rowNum-1:
-                self.bk_array[i][j].forward = 'c'
+                self.bk_array[i][j].forward = 'm'
                 if j%2==0:
                     self.bk_array[i][j].backward = 'n'
                 else:
@@ -92,7 +92,7 @@ class Maze:
                 # if j%2==1:
                 if k == 0:
                     self.bk_array[0][0].forward = 's'
-                    self.bk_array[0][0].backward = 'm'
+                    self.bk_array[0][0].backward = 'c'
                 else:
                     if j%2==0:
                         self.bk_array[i][j].forward = 's'
